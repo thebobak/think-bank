@@ -1,0 +1,3 @@
+Brookings
+	page.search("//meta[@name='ces:authors']")[0][:content]
+

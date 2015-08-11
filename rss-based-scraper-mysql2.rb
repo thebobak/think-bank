@@ -109,8 +109,6 @@ puts "\n\t\t===== Welcome to Think Bank =====\n\n"
 # Push into an array                       #
 ############################################
 
-
-
 sql_statement = 'SELECT * FROM tb_organizations WHERE organization_rss_url IS NOT NULL AND organization_skip_flag IS NULL'
 rs = db_connection.query(sql_statement)
 rs.each do |h| 
@@ -124,7 +122,7 @@ puts "\n\n#{rs.size} RSS feeds to be scraped for articles...\n\n"
 # Run the Scraper #
 ###################
 
-for link in links[3..3]
+for link in links
 
 	feed = RSS::Parser.parse(link, false) #gets links from RSS feed
 	
@@ -154,7 +152,7 @@ for link in links[3..3]
 				theOrg = h['organization_name'].to_s
 			end
 
-			getAuthor(item.link)
+			#getAuthor(item.link)
 
 
 			# Push into an array of Articles
