@@ -16,21 +16,57 @@ p doc3 = "increase in home sales in july".split(' ')
 
 p docs = [doc1, doc2, doc3]
 
-words = Array.new
-dict = Array.new
+#words = Array.new
+#dict = Array.new
+
+docid = 0
+pos = 0
+
+dict = {}
+
+# dict["home"] = [0,1]
+
+# puts dict.keys
+# p dict.values
+# p dict["home"]
+# dict["home"] << 5
+# p dict["home"]
+
+# mysym = "hello".to_sym
+# p mysym
+
+# p dict["beep"]
 
 for doc in docs
 	for word in doc
-		if not words.include?(word)
-			words.push(word)
-			newword = {word => 1}
-			dict << newword
-			puts newword[word]
+		w = word.to_sym
+		if !dict[w]
+			dict[w] = [docid]
 		else
-			dict[word.to_s] += 1
+			if !dict[w].include?(docid)
+				dict[w] << docid
+			end
 		end
 	end
+	docid += 1
 end
 
-p words
-p dict
+
+for key in dict.keys
+	puts key
+	p dict[key]
+end
+
+query1 = "home".to_sym
+query2 = "sales".to_sym
+results = []
+
+docid = 0
+while docid < docs.length
+	if dict[query1].include?(docid) && dict[query2].include?(docid)
+		results << docid
+	end
+	docid += 1
+end
+
+puts "#{results} contains both queries"
